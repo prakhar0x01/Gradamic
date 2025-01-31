@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+
+{% block start %}
+
+<section>
+<div class="container mt-5">
+    <h2 class="mb-4" style="text-align: center;">Welcome {{user.first_name}} {{user.last_name}}</h2>
+    {% include "alert.html" %}
+    <div class="card">
+        <div class="card-header">
+            User Information
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                </div>
+            </div>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group mt-3">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name }}">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name }}">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="password">New Password:</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Update</button>
+            </form>
+        </div>
+    </div>
+</div>    
+<br>
+</section>  
+
+{% endblock %}

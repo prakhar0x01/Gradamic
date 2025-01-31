@@ -1,0 +1,29 @@
+<!-- materials_list.html -->
+{% extends "index.html" %}
+
+{% block start %}
+<div class="container mt-5">
+    <h1 class="mb-4">Gradamic Materials</h1>
+    <div class="row">
+        {% for study_material in study_materials %}
+        <div class="col-md-5 mb-5">
+            <div class="card">
+                <div class="card-header">
+                  <b>{{ study_material.title }}</b>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><b>Branch :</b> {{ study_material.branch }}</li>
+                  <li class="list-group-item"><b>Year :</b> {{ study_material.year }}</li>
+                  <li class="list-group-item"><b>Subject :</b> {{ study_material.subject }}</li>
+                  <li class="list-group-item"><b>updated_at :</b> {{ study_material.created_at|date }}</li>
+                </ul>
+                <div class="card-body">
+                  <a href="{% url 'material_detail' study_material.pk %}" class="btn btn-primary">Get Notes</a>
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

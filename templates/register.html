@@ -1,0 +1,53 @@
+<!-- Signup Section -->
+{% extends "index.html" %}
+
+
+{% block start %}
+
+<section id="signup" class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+            {% include "alert.html" %}
+          <div class="card">
+            <div class="card-header">
+              <h4>Sign Up</h4>
+            </div>
+            <div class="card-body">
+              <!-- Signup form -->
+              <form method="post">
+                <!-- Input fields for username, email, and password -->
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="first_name">First Name</label>
+                  <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                </div>
+                <div class="last_name mt-3">
+                    <label for="signup-username">Last Name</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+                </div>
+                <div class="username mt-3">
+                  <label for="signup-username">Username</label>
+                  <input type="text" class="form-control" id="username" name="username" placeholder="Unique Username">
+                </div>
+                <div class="email mt-3">
+                  <label for="signup-email">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Email-Id">
+                </div>
+                <div class="password mt-3">
+                  <label for="signup-password">Password</label>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+                <!-- Signup button -->
+                <br>
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  {% endblock %}

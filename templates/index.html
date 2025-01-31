@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  {% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradamic.com</title>
+  <!-- Bootstrap CSS -->
+  <link rel="icon" type="image/x-icon" href="{% static '/img/gradamic.svg' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    /* Custom styles */
+    body {
+      font-family: Georgia, serif
+;
+      padding-top: 4rem; /* Adjust based on navbar height */
+      font-size: 1rem; /* Adjust font size for better readability */
+      color: #151515; /* Dark gray font color */
+      background-color:#C0C0C0;
+    }
+
+    .navbar-brand,
+    .nav-link {
+      color: white !important; /* Dark Blue */
+    }
+    .navbar-brand:hover,
+    .nav-link:hover {
+      color: white !important; /* Darker shade of Dark Blue on hover */
+    }
+    .jumbotron {
+      background-color: #7398bd;
+      color: #fff; /* White font color */
+    }
+    .hero-section h1,
+    .hero-section p {
+      color:#151515; /* Dark Blue */
+    }
+    .testimonials-section,
+    .latest-news-section {
+      background-color:#C0C0C0; /* Light gray background */
+    }
+    .testimonials-section h2,
+    .latest-news-section h2 {
+      color: #151515; /* Dark Blue */
+    }
+    .card-text {
+      color: #333; /* Dark gray font color */
+    }
+    .card-text strong {
+      color: #005D9A; /* Dark Blue for testimonial author */
+    }
+    .btn-primary {
+      background-color: #A91D3A ; /* Dark Blue */
+      border-color: #A91D3A ; /* Dark Blue */
+    }
+
+    .btn-secondary {
+      background-color: #A91D3A ; /* Green */
+      border-color: #A91D3A ; /* Green */
+    }
+    .btn-primary:hover {
+      background-color: #A91D3A ; /* Darker shade of Green */
+      border-color: #A91D3A  ; /* Darker shade of Green */
+    }
+    .footer {
+      background-color: #333; /* Dark gray background */
+      color: #fff; /* White font color */
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="{% static '/img/gradamic.svg' %}" width="50" height="50" class="d-inline-block align-top" alt="gradamic_logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/discuss">DISCUSSIONS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/study">STUDY</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="/accounts/dashboard">DASHBOARD</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/accounts/logout">LOGOUT</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/accounts/login">LOGIN</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/accounts/signup">SIGNUP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">ABOUT US</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% block start %}
+
+<!-- Hero Section -->
+<section class="hero-section py-5">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6">
+              <h1 class="display-4">Welcome to Gradamic</h1>
+              <p class="lead">Empowering Your Education Journey</p>
+              <p>At Gradamic, we believe in the power of education to transform lives. We are committed to providing high-quality study materials and resources to help you succeed in your academic and professional endeavors.</p>
+              <p>Whether you're a student looking to excel in your studies, a professional seeking to advance your career, or an educator striving to inspire the next generation, Gradamic is here to support you every step of the way.</p>
+              <p>Our comprehensive collection of study materials covers a wide range of subjects, from mathematics and science to literature and history. With our user-friendly platform, you can easily access and explore resources tailored to your learning needs.</p>
+              <a href="/study" class="btn btn-primary btn-lg">Explore Study Materials</a>
+          </div>
+          <div class="col-md-6">
+              <img src="{% static '/img/grdmc.png' %}" class="img-fluid rounded" alt="Hero Image">
+          </div>
+      </div>
+  </div>
+</section>
+<!-- Section 1: Testimonials -->
+<section class="testimonials-section py-5" style="background-color:#C0C0C0;">
+  <div class="container">
+      <h2 class="text-center mb-4">Testimonials</h2>
+      <div class="row">
+          <div class="col-md-6 mb-4">
+              <div class="card shadow">
+                  <div class="card-body bg-light">
+                      <p class="card-text">"Gradamic has been an invaluable resource for me throughout my academic journey. The study materials are well-organized, comprehensive, and easy to understand. Thanks to Gradamic, I've been able to excel in my studies and achieve my goals."</p>
+                      <p class="text-end"><strong>- Gradamic User</strong></p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 mb-4">
+              <div class="card shadow">
+                  <div class="card-body bg-light">
+                      <p class="card-text">"I highly recommend Gradamic to anyone looking to enhance their learning experience. The platform offers a wide range of study materials and resources that cater to different learning styles and preferences. It's truly a game-changer!"</p>
+                      <p class="text-end"><strong>- Gradamic User</strong></p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 mb-4">
+              <div class="card shadow">
+                  <div class="card-body bg-light">
+                      <p class="card-text">"The study materials provided by Gradamic are top-notch! They have helped me understand complex concepts and ace my exams. I'm grateful for the support and resources available on the platform."</p>
+                      <p class="text-end"><strong>- Gradamic User</strong></p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 mb-4">
+              <div class="card shadow">
+                  <div class="card-body bg-light">
+                      <p class="card-text">"I've been using Gradamic for a while now, and I'm impressed by the quality of study materials and the user-friendly interface. It has made studying much more efficient and enjoyable for me."</p>
+                      <p class="text-end"><strong>- Gradamic User</strong></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- Section 2: Latest News -->
+<section class="latest-news-section py-5">
+  <div class="container">
+      <h2 class="text-center mb-4">Latest News</h2>
+      <div class="row">
+          <div class="col-md-6">
+              <div class="card shadow mb-4">
+                  <!--<img src="{% static 'news1.jpg' %}" class="card-img-top" alt="News 1">-->
+                  <div class="card-body bg-light">
+                      <h5 class="card-title">New Study Resources Available</h5>
+                      <p class="card-text">We're excited to announce the addition of new study resources to our platform! <a href="/study">Explore</a> the latest materials and enhance your learning experience today.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="card shadow mb-4">
+                  <!--<img src="{% static 'news2.jpg' %}" class="card-img-top" alt="News 2">-->
+                  <div class="card-body">
+                      <h5 class="card-title bg-light">Engage with communities discussions</h5>
+                      <p class="card-text">Join community discussions, share your thoughts on career development strategies and opportunities. <a href="/discuss">Explore</a></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4 text-center">
+  <div class="container">
+    <p>&copy; 2024 Gradamic. All Rights Reserved.</p>
+    <div class="social-links mt-3">
+      <a href="#" class="text-white me-5" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="text-white me-5" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com/gradamic" class="text-white me-5" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="text-white" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <p class="mt-3">"SKILLS MATTERS NOT ACADEMICS..!"</p>
+  </div>
+</footer>
+
+
+{% endblock %}
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

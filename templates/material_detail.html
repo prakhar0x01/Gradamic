@@ -1,0 +1,86 @@
+{% extends "index.html" %}
+{% block start %}
+<div class="container mt-4">
+    {% load static %}
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2 class="card-title">{{ study_material.title }}</h2>
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Details</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Branch:</strong> {{ study_material.branch }}</li>
+                                <li class="list-group-item"><strong>Year:</strong> {{ study_material.year }}</li>
+                                <li class="list-group-item"><strong>Subject:</strong> {{ study_material.subject }}</li>
+                                <li class="list-group-item"><a href="{% url 'download_notes' study_material.pk %}" class="btn btn-primary btn-lg btn-block mt-3">Download PDF</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>             
+            </div>
+            <div class="alert alert-primary mt-4" role="alert">
+                If you're visiting us from mobile device, rendering pdf can take approx 20 seconds, please be patient
+            </div>     
+            <hr>
+            <div id="my_canvas"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Script to render PDF using PDF.js -->
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.6.347/build/pdf.min.js"></script> 
+<script>
+    var url = "{% static 'pdf/' %}{{ pdf_path }}";
+
+function renderPDF(url, canvasContainer) {
+
+	function renderPage(page) {
+
+    let viewport = page.getViewport({scale: .5})
+    const DPI = 72;
+    const PRINT_OUTPUT_SCALE = DPI/72; 
+    const scale = canvasContainer.clientWidth / viewport.width;
+		const canvas = document.createElement('canvas')
+    
+    const ctx = canvas.getContext('2d')
+    viewport = page.getViewport({scale})
+
+    canvas.width = Math.floor(viewport.width * PRINT_OUTPUT_SCALE);
+    canvas.height = Math.floor(viewport.height * PRINT_OUTPUT_SCALE);
+    canvas.style.width = '100%';
+
+    canvas.style.transform = 'scale(1,1)';
+    canvas.style.transformOrigin = '0% 0%';
+  
+    const canvasWrapper = document.createElement('div');
+
+    canvasWrapper.style.width = '100%';
+    canvasWrapper.style.height = '100%';
+  
+    canvasWrapper.appendChild(canvas);
+
+		const renderContext = {
+			canvasContext: ctx,
+			viewport,
+		}
+
+		canvasContainer.appendChild(canvasWrapper)
+
+		page.render(renderContext)
+	}
+
+	function renderPages(pdfDoc) {
+		for (let num = 1; num <= pdfDoc.numPages; num += 1)
+			pdfDoc.getPage(num).then(renderPage)
+	}
+
+	pdfjsLib.disableWorker = true
+	pdfjsLib.getDocument(url).promise.then(renderPages)
+}
+
+renderPDF(url, document.getElementById('my_canvas')) //div element
+</script>
+
+{% endblock %}
